@@ -89,7 +89,7 @@
 
     <script>
         // === Configuration ===
-        const API_URL = 'https://services7.arcgis.com/BuriUAtfp8cZMlDt/arcgis/rest/services/dev_waittimes_exb_hfl_c2a90_3b176_ae70f/FeatureServer/0/query?where=1%3D1&outFields=hospital_name,ED_Volume,ed_wait_range,opening_hours&f=pjson';
+        const API_URL = 'https://services7.arcgis.com/BuriUAtfp8cZMlDt/arcgis/rest/services/dev_waittimes_exb_hfl_6da46_c5905_9256e/FeatureServer/0/query?f=json&where=1%3D1&outFields=hospital_name,fr_hospital_name,ed_wait_range,fr_ed_wait_range,ED_Volume_string,opening_hours&returnGeometry=false&orderByFields=hospital_name%20ASC';
         const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 
         // === State Management ===
