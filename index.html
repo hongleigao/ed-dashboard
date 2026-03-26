@@ -9,7 +9,7 @@
     <style>
         /* Hide scrollbar for large screen display */
         body {
-            overflow: hidden;
+            overflow-x: hidden; /* 改为 overflow-x: hidden 允许手机端内容过多时垂直滚动 */
             background-color: #0f172a; /* Tailwind slate-900 */
         }
         /* Add subtle glow to data values for tech feel */
@@ -18,49 +18,49 @@
         }
     </style>
 </head>
-<body class="text-slate-200 h-screen w-screen flex flex-col font-sans">
+<body class="text-slate-200 min-h-screen w-full flex flex-col font-sans">
 
     <!-- Main Content Area (Centered data with hospital name below) -->
-    <main class="flex-1 flex flex-col items-center justify-center p-10 space-y-12">
+    <main class="flex-1 flex flex-col items-center justify-center p-6 md:p-10 space-y-8 md:space-y-12">
         
-        <!-- Core Data Cards (3 columns) - Moved to top -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-7xl mx-auto">
+        <!-- Core Data Cards (3 columns on desktop, 1 on mobile) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 w-full max-w-7xl mx-auto">
             
             <!-- Patient Count -->
-            <div class="bg-slate-800/80 rounded-2xl p-8 border border-slate-700 shadow-2xl flex flex-col items-center justify-center transform transition duration-500 hover:scale-105">
-                <h3 class="text-2xl text-slate-400 font-medium mb-4 uppercase tracking-widest text-center w-full">Patient Count</h3>
-                <div id="val-patient-count" class="data-value text-8xl md:text-9xl font-black text-sky-400">--</div>
+            <div class="bg-slate-800/80 rounded-2xl p-6 md:p-8 border border-slate-700 shadow-2xl flex flex-col items-center justify-center transform transition duration-500 hover:scale-105">
+                <h3 class="text-lg md:text-2xl text-slate-400 font-medium mb-2 md:mb-4 uppercase tracking-widest text-center w-full">Patient Count</h3>
+                <div id="val-patient-count" class="data-value text-7xl md:text-9xl font-black text-sky-400">--</div>
             </div>
 
             <!-- Est. Length of Stay -->
-            <div class="bg-slate-800/80 rounded-2xl p-8 border border-slate-700 shadow-2xl flex flex-col items-center justify-center transform transition duration-500 hover:scale-105">
-                <h3 class="text-2xl text-slate-400 font-medium mb-4 uppercase tracking-widest text-center w-full">Est. Length of Stay</h3>
-                <div id="val-length-stay" class="data-value text-7xl md:text-8xl font-black text-amber-400 text-center">--</div>
+            <div class="bg-slate-800/80 rounded-2xl p-6 md:p-8 border border-slate-700 shadow-2xl flex flex-col items-center justify-center transform transition duration-500 hover:scale-105">
+                <h3 class="text-lg md:text-2xl text-slate-400 font-medium mb-2 md:mb-4 uppercase tracking-widest text-center w-full">Est. Length of Stay</h3>
+                <div id="val-length-stay" class="data-value text-6xl md:text-8xl font-black text-amber-400 text-center">--</div>
             </div>
 
             <!-- Hours of Operation -->
-            <div class="bg-slate-800/80 rounded-2xl p-8 border border-slate-700 shadow-2xl flex flex-col items-center justify-center transform transition duration-500 hover:scale-105">
-                <h3 class="text-2xl text-slate-400 font-medium mb-4 uppercase tracking-widest text-center w-full">Hours of Operation</h3>
-                <div id="val-hours" class="data-value text-5xl md:text-6xl font-bold text-emerald-400 text-center leading-snug">--</div>
+            <div class="bg-slate-800/80 rounded-2xl p-6 md:p-8 border border-slate-700 shadow-2xl flex flex-col items-center justify-center transform transition duration-500 hover:scale-105">
+                <h3 class="text-lg md:text-2xl text-slate-400 font-medium mb-2 md:mb-4 uppercase tracking-widest text-center w-full">Hours of Operation</h3>
+                <div id="val-hours" class="data-value text-4xl md:text-6xl font-bold text-emerald-400 text-center leading-snug">--</div>
             </div>
 
         </div>
 
-        <!-- Hospital Name Display (Moved to bottom, smaller font) -->
-        <h2 id="display-hospital-name" class="text-4xl md:text-5xl font-bold text-slate-300 tracking-wide text-center drop-shadow-md mt-4">
-            ---
+        <!-- Hospital Name Display -->
+        <h2 id="display-hospital-name" class="text-3xl md:text-5xl font-bold text-slate-300 tracking-wide text-center drop-shadow-md mt-4 px-4">
+            Loading...
         </h2>
 
     </main>
 
     <!-- Bottom Control and Status Bar -->
-    <footer class="w-full p-6 px-10 flex justify-between items-end bg-slate-900/80 border-t border-slate-800">
+    <footer class="w-full p-4 md:p-6 px-6 md:px-10 flex flex-col md:flex-row justify-between items-center md:items-end bg-slate-900/80 border-t border-slate-800 gap-4">
         <!-- Bottom Left: Hospital Selector -->
-        <div class="flex items-center space-x-4">
-            <label for="hospital-select" class="text-lg text-slate-400 font-medium whitespace-nowrap tracking-wide">Switch Location:</label>
-            <div class="relative w-72">
-                <select id="hospital-select" class="block w-full appearance-none bg-slate-800 border border-slate-600 text-slate-400 py-3 px-5 pr-8 rounded-lg shadow leading-tight focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-lg cursor-pointer transition-colors">
-                    <option value="">Loading...</option>
+        <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto">
+            <label for="hospital-select" class="text-sm md:text-lg text-slate-400 font-medium whitespace-nowrap tracking-wide">Switch Location:</label>
+            <div class="relative w-full md:w-72">
+                <select id="hospital-select" class="block w-full appearance-none bg-slate-800 border border-slate-600 text-slate-400 py-3 px-5 pr-8 rounded-lg shadow leading-tight focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-base md:text-lg cursor-pointer transition-colors text-center md:text-left">
+                    <option value="">Loading Data...</option>
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
                     <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -69,22 +69,22 @@
         </div>
 
         <!-- Bottom Right: Status Info -->
-        <div class="flex flex-col items-end space-y-2">
-            <div id="status-indicator" class="flex items-center space-x-2 text-sm">
+        <div class="flex flex-col items-center md:items-end space-y-1 md:space-y-2">
+            <div id="status-indicator" class="flex items-center space-x-2 text-xs md:text-sm">
                 <span class="relative flex h-3 w-3">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                 </span>
                 <span class="text-emerald-400 font-medium tracking-wide">Live Sync Active</span>
             </div>
-            <div id="update-time" class="text-sm text-slate-400 font-mono">Last Updated: --:--</div>
+            <div id="update-time" class="text-xs md:text-sm text-slate-400 font-mono">Last Updated: --:--</div>
         </div>
     </footer>
 
     <!-- Error Toast (Top centered) -->
-    <div id="error-toast" class="fixed top-10 left-1/2 transform -translate-x-1/2 bg-red-900 text-red-100 px-6 py-4 rounded-lg shadow-2xl hidden items-center space-x-3 transition-opacity duration-300 z-50">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        <span id="error-message">Data fetch failed. Please check network.</span>
+    <div id="error-toast" class="fixed top-10 left-1/2 transform -translate-x-1/2 bg-red-900 text-red-100 px-6 py-4 rounded-lg shadow-2xl hidden items-center space-x-3 transition-opacity duration-300 z-50 w-[90%] md:w-auto">
+        <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span id="error-message" class="text-sm md:text-base break-words">Data fetch failed. Please check network.</span>
     </div>
 
     <script>
@@ -125,10 +125,15 @@
                 json.features.forEach(feature => {
                     const attrs = feature.attributes;
                     if (attrs.hospital_name) {
+                        // 【核心修复区域】：修正了 ED_Volume 为 ED_Volume_string，并增加了对 "-" 和空值的防御性处理
+                        const vol = attrs.ED_Volume_string;
+                        const wait = attrs.ed_wait_range;
+                        const hours = attrs.opening_hours;
+
                         hospitalDataMap.set(attrs.hospital_name, {
-                            patientCount: attrs.ED_Volume !== null ? attrs.ED_Volume : 'N/A',
-                            lengthOfStay: attrs.ed_wait_range || 'N/A',
-                            hours: attrs.opening_hours || 'N/A'
+                            patientCount: (vol && vol.trim() !== "" && vol !== "-") ? vol : 'N/A',
+                            lengthOfStay: (wait && wait.trim() !== "") ? wait : 'N/A',
+                            hours: (hours && hours.trim() !== "") ? hours : 'N/A'
                         });
                     }
                 });
@@ -145,11 +150,11 @@
 
                 // Refresh UI (keep currently selected hospital)
                 if (!currentSelectedHospital && hospitalDataMap.size > 0) {
+                    // Default to Saint John Regional Hospital if available, else pick the first one
                     const targetHospital = "Saint John Regional Hospital";
                     if (hospitalDataMap.has(targetHospital)) {
                         currentSelectedHospital = targetHospital;
                     } else {
-                        // Fallback to the first one if target is not found
                         currentSelectedHospital = Array.from(hospitalDataMap.keys())[0];
                     }
                     selectEl.value = currentSelectedHospital;
@@ -182,24 +187,29 @@
 
             const data = hospitalDataMap.get(currentSelectedHospital);
             
-            // Update DOM
+            // Update DOM text
             nameEl.textContent = currentSelectedHospital;
             countEl.textContent = data.patientCount;
             stayEl.textContent = data.lengthOfStay;
             hoursEl.textContent = data.hours;
             
-            // Defensive UI: dynamically adjust font sizes for long strings
-            // Using full className assignments to match the new default larger sizes
+            // Defensive UI: dynamically adjust font sizes for long strings to prevent layout break on mobile
             if (data.lengthOfStay.length > 15) {
-                stayEl.className = "data-value text-5xl md:text-6xl font-black text-amber-400 text-center";
+                stayEl.className = "data-value text-4xl md:text-6xl font-black text-amber-400 text-center";
             } else {
-                stayEl.className = "data-value text-7xl md:text-8xl font-black text-amber-400 text-center";
+                stayEl.className = "data-value text-6xl md:text-8xl font-black text-amber-400 text-center";
             }
             
             if (data.hours.length > 20) {
-                hoursEl.className = "data-value text-3xl md:text-4xl font-bold text-emerald-400 text-center leading-snug";
+                hoursEl.className = "data-value text-2xl md:text-4xl font-bold text-emerald-400 text-center leading-snug";
             } else {
-                hoursEl.className = "data-value text-5xl md:text-6xl font-bold text-emerald-400 text-center leading-snug";
+                hoursEl.className = "data-value text-4xl md:text-6xl font-bold text-emerald-400 text-center leading-snug";
+            }
+
+            if (data.patientCount === 'N/A') {
+                countEl.className = "data-value text-6xl md:text-8xl font-black text-slate-500 text-center opacity-70";
+            } else {
+                countEl.className = "data-value text-7xl md:text-9xl font-black text-sky-400 text-center";
             }
         }
 
